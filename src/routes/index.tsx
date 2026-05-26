@@ -15,6 +15,7 @@ import { useAuth } from "@/lib/auth";
 import {
   Users, Building2, Globe2, Network, Mail, ShieldCheck, Target, Sun, Moon, Download, FileDown, LogOut,
 } from "lucide-react";
+import { Navbar } from "@/components/Navbar";
 
 export const Route = createFileRoute("/")({ component: Dashboard });
 
@@ -146,33 +147,7 @@ function Dashboard() {
 
   return (
     <div>
-      <nav style={{
-        background: "var(--bg2)", borderBottom: "1px solid var(--border-c)",
-        padding: "0 24px", height: 56, display: "flex", alignItems: "center", justifyContent: "space-between",
-        position: "sticky", top: 0, zIndex: 100,
-      }}>
-        <div style={{ fontFamily: "var(--font-head)", fontWeight: 800, fontSize: 16, letterSpacing: "0.04em", display: "flex", alignItems: "center", gap: 10 }}>
-          <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--blue)" }} />
-          SUPERCOMM
-          <span style={{ color: "var(--text3)", fontWeight: 400, fontSize: 13, marginLeft: 6 }}>/ Inteligência de Mercado ISP</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <span style={{ fontSize: 12, color: "var(--text3)" }}>
-            {data ? `${data.length.toLocaleString("pt-BR")} provedores na base` : "Carregando..."}
-          </span>
-          <button onClick={toggle} title="Alternar tema" style={iconBtn} aria-label="Alternar tema">
-            {mode === "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
-          {user && (
-            <span style={{ fontSize: 12, color: "var(--text2)", maxWidth: 180, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={user.email ?? ""}>
-              {user.email}
-            </span>
-          )}
-          <button onClick={() => signOut()} title="Sair" style={iconBtn} aria-label="Sair">
-            <LogOut size={16} />
-          </button>
-        </div>
-      </nav>
+      <Navbar providerCount={data?.length} mode={mode} toggle={toggle} />
 
       <main style={{ maxWidth: 1400, margin: "0 auto", padding: "24px 24px 60px" }}>
         <h1 style={{ fontFamily: "var(--font-head)", fontSize: 26, fontWeight: 700, marginBottom: 4 }}>Mercado ISP Brasil</h1>
